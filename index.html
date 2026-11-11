@@ -1,12 +1,897 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porfolio</title>
+    <title>Emmanuel Olatunji Olagoke | Backend & Cloud DevOps Engineer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#080c14',
+                        cardbg: '#0f172a',
+                        cardborder: '#1e293b',
+                        emeraldaccent: '#10b981',
+                        cyanaccent: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080c14;
+            color: #f1f5f9;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            border-image: linear-gradient(to right, #10b981, #06b6d4) 1;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello World! Welcome to my website.</h1>
-    <p>Hosted on GitHub Pages.</p>
+<body class="bg-darkbg text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Ambient Background Lighting -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full filter blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-darkbg/80 border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2 text-lg font-bold tracking-tight">
+                <span class="text-emerald-400 code-font">&lt;EO&gt;</span>
+                <span class="text-white hidden sm:inline">Emmanuel Olagoke</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-emerald-400 transition-colors">About</a>
+                <a href="#skills" class="text-slate-300 hover:text-emerald-400 transition-colors">Skills</a>
+                <a href="#experience" class="text-slate-300 hover:text-emerald-400 transition-colors">Experience</a>
+                <a href="#projects" class="text-slate-300 hover:text-emerald-400 transition-colors">Projects</a>
+                <a href="#education" class="text-slate-300 hover:text-emerald-400 transition-colors">Education & Certs</a>
+                <a href="#contact" class="text-slate-300 hover:text-emerald-400 transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleApiModal()" class="px-3 py-1.5 rounded-lg border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 text-xs font-mono transition-all flex items-center space-x-1.5">
+                    <i class="fa-solid fa-code"></i>
+                    <span>/api/v1/profile</span>
+                </button>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-900/95 px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">About</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">Skills</a>
+            <a href="#experience" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">Experience</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">Projects</a>
+            <a href="#education" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">Education & Certs</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-emerald-400 font-medium">Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <!-- HERO SECTION -->
+        <section id="about" class="pt-12 pb-20 md:pt-20 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Available for Remote Opportunities Worldwide
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+                        Emmanuel Olatunji <span class="gradient-text">Olagoke</span>
+                    </h1>
+
+                    <h2 class="text-xl sm:text-2xl font-semibold text-slate-300 font-mono">
+                        Backend & Cloud DevOps Engineer
+                    </h2>
+
+                    <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
+                        Backend engineer with extensive experience building & documenting high-throughput REST APIs, optimizing PostgreSQL queries, and orchestrating asynchronous workloads. Specialized in building resilient fintech/agritech infrastructure and cloud automation with AWS, Docker, and Kubernetes.
+                    </p>
+
+                    <!-- AWS Certification Badge -->
+                    <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl flex-shrink-0">
+                            <i class="fa-brands fa-aws"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-semibold text-white">AWS Certified Cloud Practitioner</span>
+                                <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-amber-500/20 text-amber-300">2025</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Validated knowledge in AWS Cloud Security, Architecture, & Infrastructure</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#experience" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20 flex items-center space-x-2">
+                            <span>View Experience</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#contact" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold border border-slate-700 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-envelope text-emerald-400"></i>
+                            <span>Contact Me</span>
+                        </a>
+                        <a href="mailto:emma.goke05@gmail.com" class="px-4 py-3 rounded-xl border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all flex items-center justify-center">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            <span>Resume</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LIVE CLOUD HEALTH MONITOR WIDGET -->
+                <div class="lg:col-span-5">
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                                <span class="text-xs text-slate-400 font-mono ml-2">eks-cluster-node-01: monitoring.py</span>
+                            </div>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> LIVE
+                            </span>
+                        </div>
+
+                        <!-- Monitor Gauge Displays -->
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-slate-400">CPU LOAD (psutil)</span>
+                                    <span class="text-emerald-400 font-bold" id="cpu-val">24.2%</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div id="cpu-bar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-700 rounded-full" style="width: 24.2%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-slate-400">MEMORY UTILIZATION</span>
+                                    <span class="text-cyan-400 font-bold" id="mem-val">41.8%</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div id="mem-bar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-700 rounded-full" style="width: 41.8%"></div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 pt-2">
+                                <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                                    <span class="text-[10px] text-slate-500 font-mono uppercase block">Queue (BullMQ/Redis)</span>
+                                    <span class="text-sm font-bold text-slate-200 font-mono">0 pending jobs</span>
+                                </div>
+                                <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                                    <span class="text-[10px] text-slate-500 font-mono uppercase block">PostgreSQL Health</span>
+                                    <span class="text-sm font-bold text-emerald-400 font-mono">Sub-sec queries</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Code snippet footer -->
+                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                            <span>Polling interval: 5s</span>
+                            <span>Amazon EKS + Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METRICS COUNTER GRID -->
+        <section class="border-y border-slate-800/80 bg-slate-900/40 py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/30">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono mb-1">200,000+</div>
+                        <div class="text-xs sm:text-sm text-slate-400 font-medium">Farmers Served (Crop2Cash)</div>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/30">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono mb-1">200M+ NGN</div>
+                        <div class="text-xs sm:text-sm text-slate-400 font-medium">Payment Volume Managed</div>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/30">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono mb-1">4+ Years</div>
+                        <div class="text-xs sm:text-sm text-slate-400 font-medium">Software Eng. & Systems</div>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/30">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-amber-400 font-mono mb-1">AWS</div>
+                        <div class="text-xs sm:text-sm text-slate-400 font-medium">Certified Practitioner</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS MATRIX -->
+        <section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-mono text-emerald-400 tracking-wider uppercase mb-2">// TECHNICAL COMPETENCIES</h2>
+                <h3 class="text-3xl font-extrabold text-white">Skills & Technologies</h3>
+                <p class="text-slate-400 mt-2">Comprehensive stack spanning modern backend services, databases, messaging queues, and cloud infrastructure.</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="skill-tabs">
+                <button onclick="filterSkills('all')" class="skill-tab-btn active px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-emerald-500 text-slate-950">All</button>
+                <button onclick="filterSkills('languages')" class="skill-tab-btn px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-slate-800 text-slate-400 hover:text-white">Languages</button>
+                <button onclick="filterSkills('frameworks')" class="skill-tab-btn px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-slate-800 text-slate-400 hover:text-white">Frameworks</button>
+                <button onclick="filterSkills('databases')" class="skill-tab-btn px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-slate-800 text-slate-400 hover:text-white">Databases & Caching</button>
+                <button onclick="filterSkills('devops')" class="skill-tab-btn px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-slate-800 text-slate-400 hover:text-white">DevOps & Cloud</button>
+                <button onclick="filterSkills('queue')" class="skill-tab-btn px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all bg-slate-800 text-slate-400 hover:text-white">Queue & Integrations</button>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="skills-grid">
+                <!-- Python -->
+                <div class="skill-card languages p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-brands fa-python text-emerald-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">Python</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400">Core</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Django, DRF, Flask, psutil, async workers, scripts automation.</p>
+                </div>
+
+                <!-- TypeScript / JavaScript -->
+                <div class="skill-card languages p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-brands fa-js text-yellow-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">TypeScript / Node.js</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400">Core</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Strong typing, NestJS, Express, AdonisJS v6 backend architecture.</p>
+                </div>
+
+                <!-- PostgreSQL -->
+                <div class="skill-card databases p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-database text-cyan-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">PostgreSQL</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400">Advanced</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Query optimization, ts_vector, GIN indexing, full-text search, ts_rank.</p>
+                </div>
+
+                <!-- Docker & Kubernetes -->
+                <div class="skill-card devops p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-brands fa-docker text-blue-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">Docker & Kubernetes</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">Cloud Native</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Containerization, Amazon ECR & Amazon EKS clusters, Python K8s client.</p>
+                </div>
+
+                <!-- AWS & Terraform -->
+                <div class="skill-card devops p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-brands fa-aws text-amber-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">AWS & Terraform</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Infrastructure</span>
+                    </div>
+                    <p class="text-xs text-slate-400">VPC, EC2, RDS, S3, EKS, IaC state management in remote S3 buckets.</p>
+                </div>
+
+                <!-- Message Queues -->
+                <div class="skill-card queue p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-[#d82c20] fa-layer-group text-red-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">Celery, BullMQ & Redis</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/10 text-red-400">Async</span>
+                    </div>
+                    <p class="text-xs text-slate-400">High-throughput background jobs, real-time push/ad workflows, caching.</p>
+                </div>
+
+                <!-- Django & Frameworks -->
+                <div class="skill-card frameworks p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-code-branch text-emerald-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">Django REST & NestJS</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400">Backend</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Scalable modular architecture, TypeORM, AdonisJS v6, Express, Flask.</p>
+                </div>
+
+                <!-- Integrations & Security -->
+                <div class="skill-card queue p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-shield-halved text-purple-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">Fintech & Auth Integrations</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400">Security</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Paystack DVAs, Redbiller API, OAuth2 (Apple/Google), JWT, 2FA, RBAC.</p>
+                </div>
+
+                <!-- Monitoring & Linux -->
+                <div class="skill-card devops p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-server text-cyan-400 text-2xl"></i>
+                            <h4 class="font-bold text-white">CI/CD & Monitoring</h4>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400">Operations</span>
+                    </div>
+                    <p class="text-xs text-slate-400">GitHub Actions, DigitalOcean, Plotly metrics dashboards, Linux admin, Git.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE SECTION -->
+        <section id="experience" class="py-20 bg-slate-900/30 border-y border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-mono text-emerald-400 tracking-wider uppercase mb-2">// CAREER HISTORY</h2>
+                    <h3 class="text-3xl font-extrabold text-white">Work Experience</h3>
+                    <p class="text-slate-400 mt-2">Proven track record building mission-critical backend systems for fintech, agritech, and classified platforms.</p>
+                </div>
+
+                <div class="relative border-l-2 border-slate-800 left-2 md:left-1/2 -ml-0.5 space-y-12">
+                    <!-- Crop2Cash -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-slate-900"></div>
+                        <div class="md:w-1/2 md:pr-10 md:text-right md:ml-auto">
+                            <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 hover:border-emerald-500/40 transition-all text-left">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="text-xl font-bold text-white">Backend Engineer</h4>
+                                    <span class="text-xs font-mono text-emerald-400 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">Oct 2023 – Apr 2026</span>
+                                </div>
+                                <div class="text-sm font-semibold text-slate-300 mb-4">Crop2Cash</div>
+                                <ul class="space-y-2 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Built scalable REST APIs in Django, DRF, and Node.js powering web, mobile, & USSD products serving <strong class="text-slate-200">200,000+ farmers</strong>.</li>
+                                    <li>Managed Paystack Dedicated Virtual Account (DVA) gateway processing <strong class="text-slate-200">over 200 million NGN</strong> in transaction volume with automated bulk payout error handling.</li>
+                                    <li>Implemented real-time updates using Celery queues & WebSockets, optimizing PostgreSQL queries for high-volume spikes.</li>
+                                    <li>Shipped Two-Factor Authentication (2FA) supporting authenticator apps and email verification.</li>
+                                    <li>Architected internal warehouse inventory management system.</li>
+                                </ul>
+                                <div class="mt-4 flex flex-wrap gap-1.5">
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Django</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Node.js</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Paystack DVA</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Celery</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">PostgreSQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crescita Solutions - Queposts -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-900"></div>
+                        <div class="md:w-1/2 md:pl-10 md:mr-auto">
+                            <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 hover:border-cyan-500/40 transition-all text-left">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="text-xl font-bold text-white">Backend Engineer <span class="text-xs text-slate-400 font-normal">(Contract)</span></h4>
+                                    <span class="text-xs font-mono text-cyan-400 px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20">Aug 2025 – Dec 2025</span>
+                                </div>
+                                <div class="text-sm font-semibold text-slate-300 mb-4">Crescita Solutions - Queposts</div>
+                                <ul class="space-y-2 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Designed and built a scalable classifieds platform from scratch using NestJS.</li>
+                                    <li>Engineered hybrid full-text search with PostgreSQL <code class="text-cyan-300">ts_vector</code> & GIN indexing, achieving <strong class="text-slate-200">sub-second search times</strong> with custom relevance weighting.</li>
+                                    <li>Built high-throughput background queue using Redis and BullMQ for ad workflows.</li>
+                                    <li>Implemented RBAC with content-moderation queues and multi-currency bank transfer subscriptions via Redbiller API.</li>
+                                </ul>
+                                <div class="mt-4 flex flex-wrap gap-1.5">
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">NestJS</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">GIN Indexing</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">BullMQ</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Redbiller API</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GoodyBay -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-slate-900"></div>
+                        <div class="md:w-1/2 md:pr-10 md:text-right md:ml-auto">
+                            <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 hover:border-emerald-500/40 transition-all text-left">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="text-xl font-bold text-white">Backend Engineer <span class="text-xs text-slate-400 font-normal">(Contract)</span></h4>
+                                    <span class="text-xs font-mono text-emerald-400 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">Aug 2025 – Sept 2025</span>
+                                </div>
+                                <div class="text-sm font-semibold text-slate-300 mb-4">GoodyBay</div>
+                                <ul class="space-y-2 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Initialized core backend infrastructure from scratch in NestJS powering iOS & Android apps.</li>
+                                    <li>Integrated multi-channel OAuth2 authentication (Sign in with Apple & Google) alongside JWT.</li>
+                                    <li>Embedded Paystack checkout pipelines and configured Redis/BullMQ background push notifications.</li>
+                                </ul>
+                                <div class="mt-4 flex flex-wrap gap-1.5">
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">NestJS</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">OAuth2</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Paystack</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Redis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cypherion -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-900"></div>
+                        <div class="md:w-1/2 md:pl-10 md:mr-auto">
+                            <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 hover:border-cyan-500/40 transition-all text-left">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="text-xl font-bold text-white">Backend Engineer <span class="text-xs text-slate-400 font-normal">(Contract)</span></h4>
+                                    <span class="text-xs font-mono text-cyan-400 px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20">Oct 2024 – Apr 2025</span>
+                                </div>
+                                <div class="text-sm font-semibold text-slate-300 mb-4">Cypherion</div>
+                                <ul class="space-y-2 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Built Islamic investment platform services using AdonisJS v6 and TypeScript.</li>
+                                    <li>Integrated Paystack Dedicated Virtual Accounts (DVA) for automated user wallet creation and funding tracking.</li>
+                                </ul>
+                                <div class="mt-4 flex flex-wrap gap-1.5">
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">AdonisJS v6</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">TypeScript</span>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Paystack DVA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALX Software Engineering -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-600 border-4 border-slate-900"></div>
+                        <div class="md:w-1/2 md:pr-10 md:text-right md:ml-auto">
+                            <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 hover:border-slate-700 transition-all text-left">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <h4 class="text-xl font-bold text-white">Software Engineering Trainee</h4>
+                                    <span class="text-xs font-mono text-slate-400 px-2.5 py-1 rounded bg-slate-800">Aug 2022 – Oct 2023</span>
+                                </div>
+                                <div class="text-sm font-semibold text-slate-300 mb-2">ALX Program</div>
+                                <p class="text-xs text-slate-400">Completed intensive curriculum focused on C, low-level systems programming, data structures, algorithms, and full-stack DevOps principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEVOPS & CLOUD PROJECTS SECTION -->
+        <section id="projects" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono text-emerald-400 tracking-wider uppercase mb-2">// CLOUD & DEVOPS PROJECTS</h2>
+                <h3 class="text-3xl font-extrabold text-white">Featured Architecture Projects</h3>
+                <p class="text-slate-400 mt-2">Hands-on containerization, Kubernetes deployment, and Infrastructure-as-Code implementations.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Project 1: Cloud-Native Flask Monitoring App -->
+                <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-emerald-400 border border-slate-700">Docker + EKS</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Cloud-Native Flask Monitoring App</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                            Built a Flask & psutil application with Plotly gauges reporting real-time CPU & memory metrics with 5-second polling. Containerized via Docker, stored in Amazon ECR, and programmatically deployed to an Amazon EKS cluster via Python SDK scripts.
+                        </p>
+                        
+                        <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80 mb-4 font-mono text-xs text-slate-300 space-y-1">
+                            <div class="text-emerald-400 font-bold mb-1">Architecture Highlights:</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Containerized Flask app with Dockerfile optimization</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Automated image push to Amazon ECR registry</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Deployed pods to EKS via boto3 & Kubernetes Python client</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/60">
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Python Flask</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">psutil</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Plotly</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Amazon ECR</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Amazon EKS</span>
+                    </div>
+                </div>
+
+                <!-- Project 2: Three-Tier AWS Infrastructure with Terraform -->
+                <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 flex flex-col justify-between hover:border-cyan-500/50 transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                                <i class="fa-solid fa-cubes-stacked"></i>
+                            </div>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-cyan-400 border border-slate-700">Terraform IaC</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">3-Tier AWS Infrastructure via Terraform</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                            Designed production-ready AWS VPC infrastructure utilizing Terraform modules. Configured isolated public, private, and database subnets, auto-scaled EC2 compute tiers, and resilient RDS MySQL with remote state locking in AWS S3.
+                        </p>
+
+                        <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80 mb-4 font-mono text-xs text-slate-300 space-y-1">
+                            <div class="text-cyan-400 font-bold mb-1">Architecture Highlights:</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-500"></i> VPC setup with isolated Public/Private/DB Subnets</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-500"></i> Frontend/Backend EC2 compute instances behind Security Groups</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-500"></i> Amazon RDS MySQL database tier with S3 Remote State</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/60">
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Terraform</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">AWS VPC</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">EC2 & RDS</span>
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">AWS S3</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <section id="education" class="py-20 bg-slate-900/30 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Academic Education -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Education</h3>
+                                <p class="text-xs text-slate-400">Engineering degree foundation</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60">
+                            <span class="text-xs font-mono text-emerald-400 px-2.5 py-0.5 rounded bg-emerald-500/10">2015 – 2020</span>
+                            <h4 class="text-lg font-bold text-white mt-2">B.Sc. Electronic & Electrical Engineering</h4>
+                            <p class="text-sm text-slate-300 mt-1">Obafemi Awolowo University, Ile-Ife, Osun State</p>
+                            <p class="text-xs text-slate-400 mt-3">Core coursework covering control systems, telecommunications, digital electronics, hardware-software interfacing, and network architecture.</p>
+                        </div>
+                    </div>
+
+                    <!-- Certifications & Early Labs -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Certifications & Labs</h3>
+                                <p class="text-xs text-slate-400">Cloud credentials & foundation labs</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-white">AWS Certified Cloud Practitioner</h4>
+                                    <p class="text-xs text-slate-400">Amazon Web Services</p>
+                                </div>
+                                <span class="text-xs font-mono text-amber-400 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">Issued 2025</span>
+                            </div>
+
+                            <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
+                                <h4 class="font-bold text-white text-sm">Cyber Security Lab & Proxmox Hypervisor</h4>
+                                <p class="text-xs text-slate-400">Obafemi Awolowo University (2018-2019)</p>
+                                <p class="text-xs text-slate-400 mt-1">Managed cloud VMs using Proxmox bare-metal hypervisors and implemented PGP encryption for mail servers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h2 class="text-xs font-mono text-emerald-400 tracking-wider uppercase mb-2">// GET IN TOUCH</h2>
+                        <h3 class="text-3xl font-extrabold text-white">Let's Build Something Robust</h3>
+                        <p class="text-slate-400 text-sm mt-3">
+                            Currently open to full-time remote backend engineer roles, cloud contract assignments, or infrastructure optimization projects.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <a href="mailto:emma.goke05@gmail.com" class="p-4 rounded-xl border border-slate-800 bg-slate-900/60 flex items-center space-x-4 hover:border-emerald-500/40 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 uppercase font-mono block">Direct Email</span>
+                                <span class="text-sm font-semibold text-white">emma.goke05@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <a href="tel:+2347060503587" class="p-4 rounded-xl border border-slate-800 bg-slate-900/60 flex items-center space-x-4 hover:border-emerald-500/40 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 uppercase font-mono block">Phone / WhatsApp</span>
+                                <span class="text-sm font-semibold text-white">+234 706 050 3587</span>
+                            </div>
+                        </a>
+
+                        <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/60 flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 uppercase font-mono block">Location</span>
+                                <span class="text-sm font-semibold text-white">Nigeria (Open to Worldwide Remote)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="p-6 sm:p-8 rounded-2xl border border-slate-800 bg-slate-900/80 space-y-4 backdrop-blur-md">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono text-slate-400 mb-1">Your Name</label>
+                                <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
+                                <input type="email" required placeholder="john@company.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-1">Subject</label>
+                            <input type="text" required placeholder="Backend Engineer Role / Project Inquiry" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-1">Message</label>
+                            <textarea required rows="4" placeholder="Hi Emmanuel, we are impressed with your work at Crop2Cash and would love to chat..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold hover:opacity-95 transition-all text-sm flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/20">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+
+                        <div id="form-feedback" class="hidden p-3 rounded-lg text-xs font-mono text-center"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © 2026 Emmanuel Olatunji Olagoke. All rights reserved.
+            </div>
+            <div class="flex space-x-6 text-base">
+                <a href="mailto:emma.goke05@gmail.com" class="text-slate-400 hover:text-emerald-400"><i class="fa-solid fa-envelope"></i></a>
+                <a href="tel:+2347060503587" class="text-slate-400 hover:text-emerald-400"><i class="fa-solid fa-phone"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="text-slate-400 hover:text-emerald-400"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="text-slate-400 hover:text-emerald-400"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JSON CV MODAL (/api/v1/profile) -->
+    <div id="api-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+                <div class="flex items-center space-x-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-mono text-emerald-400">GET /api/v1/profile HTTP/1.1 (200 OK)</span>
+                </div>
+                <button onclick="toggleApiModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="p-4 overflow-y-auto font-mono text-xs text-emerald-300 bg-slate-950/90 leading-relaxed">
+<pre id="json-code">
+{
+  "developer": {
+    "name": "Emmanuel Olatunji Olagoke",
+    "title": "Backend & Cloud/DevOps Engineer",
+    "location": "Nigeria (Open to Remote)",
+    "email": "emma.goke05@gmail.com",
+    "phone": "+234 706 050 3587",
+    "certifications": ["AWS Certified Cloud Practitioner (2025)"],
+    "metrics": {
+      "farmers_impacted": "200,000+",
+      "payment_volume_processed_ngn": "200,000,000+"
+    },
+    "core_stack": [
+      "Python", "TypeScript", "Node.js", "Django", "NestJS", 
+      "PostgreSQL", "Redis", "BullMQ", "Celery", "Docker", 
+      "Kubernetes (EKS)", "Terraform", "AWS"
+    ],
+    "experience": [
+      {
+        "company": "Crop2Cash",
+        "role": "Backend Engineer",
+        "period": "Oct 2023 - Apr 2026",
+        "highlights": [
+          "Powered 200,000+ farmer operations",
+          "Managed 200M+ NGN Paystack DVA payment gateway",
+          "Real-time notifications via Celery & WebSockets"
+        ]
+      },
+      {
+        "company": "Crescita Solutions - Queposts",
+        "role": "Backend Engineer (Contract)",
+        "period": "Aug 2025 - Dec 2025",
+        "highlights": [
+          "Built NestJS classifieds platform from scratch",
+          "Engineered PostgreSQL ts_vector GIN index search engine"
+        ]
+      }
+    ]
+  }
+}
+</pre>
+            </div>
+
+            <div class="p-3 border-t border-slate-800 bg-slate-950 flex justify-between items-center text-xs">
+                <span class="text-slate-500 font-mono">Response time: 14ms | Content-Type: application/json</span>
+                <button onclick="copyJsonProfile()" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono hover:bg-emerald-500/20">
+                    <i class="fa-regular fa-copy mr-1"></i> Copy JSON
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Live Cloud Health Monitor Simulator
+        function updateMetrics() {
+            const cpuVal = (18 + Math.random() * 20).toFixed(1);
+            const memVal = (38 + Math.random() * 10).toFixed(1);
+
+            const cpuBar = document.getElementById('cpu-bar');
+            const memBar = document.getElementById('mem-bar');
+            const cpuText = document.getElementById('cpu-val');
+            const memText = document.getElementById('mem-val');
+
+            if (cpuBar && memBar && cpuText && memText) {
+                cpuBar.style.width = cpuVal + '%';
+                memBar.style.width = memVal + '%';
+                cpuText.innerText = cpuVal + '%';
+                memText.innerText = memVal + '%';
+            }
+        }
+        setInterval(updateMetrics, 5000);
+
+        // 2. Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 3. Technical Skills Filter
+        function filterSkills(category) {
+            const cards = document.querySelectorAll('.skill-card');
+            const buttons = document.querySelectorAll('.skill-tab-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-500', 'text-slate-950');
+                btn.classList.add('bg-slate-800', 'text-slate-400');
+            });
+
+            event.target.classList.remove('bg-slate-800', 'text-slate-400');
+            event.target.classList.add('bg-emerald-500', 'text-slate-950');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 4. API Modal Toggle
+        function toggleApiModal() {
+            const modal = document.getElementById('api-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // 5. Copy JSON Profile
+        function copyJsonProfile() {
+            const jsonText = document.getElementById('json-code').innerText;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = jsonText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const copyBtn = event.currentTarget;
+            copyBtn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy mr-1"></i> Copy JSON';
+            }, 2000);
+        }
+
+        // 6. Form Submission Simulation
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden', 'bg-red-500/10', 'text-red-400');
+            feedback.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border', 'border-emerald-500/30');
+            feedback.innerText = "Thank you! Message received. Emmanuel will reply shortly.";
+
+            e.target.reset();
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
