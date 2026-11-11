@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-contact",
+  "main": "src/index.js",
+  "compatibility_date": "2026-01-01",
+  "vars": {
+    "TO_EMAIL": "emma.goke05@gmail.com",
+    "FROM_EMAIL": "Portfolio <onboarding@resend.dev>"
+  }
+}
