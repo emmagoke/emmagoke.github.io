@@ -98,6 +98,8 @@ footer a:hover{color:var(--accent)}
     <ul>
       <li>Built REST APIs in Django, DRF and Node.js behind web, mobile and USSD products used by 200,000+ farmers.</li>
       <li>Ran a Paystack Dedicated Virtual Account gateway that moved over ₦200 million, including bulk payouts and error handling.</li>
+      <li>Connected Sentry error tracking to the USSD server hosted on Heroku, and used it together with application logs to find and diagnose production issues.</li>
+      <li>Debugged payment issues between the platform and Paystack, tracing failures through application logs.</li>
       <li>Added real-time notifications with Celery and WebSockets, and tuned PostgreSQL queries for busy periods.</li>
       <li>Shipped two-factor authentication (authenticator apps and email) and an internal warehouse inventory system.</li>
     </ul>
@@ -106,12 +108,15 @@ footer a:hover{color:var(--accent)}
 
   <div class="job">
     <div class="meta"><span>CrescitaSolutions · Queposts (contract)</span><span>Aug – Dec 2025</span></div>
-    <h3>Backend Engineer</h3>
-    <ul>
-      <li>Designed a classifieds platform for jobs, businesses and services from scratch in NestJS.</li>
-      <li>Built hybrid full-text search with PostgreSQL ts_vector and GIN indexes, returning results in under a second.</li>
-      <li>Added background jobs with Redis and BullMQ, role-based access control, a moderation queue, and multi-currency subscriptions via Redbiller.</li>
-    </ul>
+      <h3>Backend Engineer</h3>
+      <ul>
+        <li>Designed a classifieds platform for jobs, businesses and services from scratch in NestJS.</li>
+        <li>Built hybrid full-text search with PostgreSQL ts_vector and GIN indexes, returning results in under a second.</li>
+        <!-- <li>Added background jobs with Redis and BullMQ, role-based access control, a moderation queue, and multi-currency subscriptions via Redbiller.</li> -->
+        <li>Built a high-throughput background job system with Redis and BullMQ for asynchronous notifications and ad workflows.</li>
+        <li>Investigated and debugged payment issues in the Redbiller bank-transfer integration.</li>
+        <li>Built a multi-tier subscription and payment system with multi-currency support and bank transfer via the Redbiller API; managed deployment on Digital Ocean.</li>
+      </ul>
     <div class="tags"><span>NestJS</span><span>PostgreSQL search</span><span>BullMQ</span><span>Redbiller</span></div>
   </div>
 
@@ -121,6 +126,7 @@ footer a:hover{color:var(--accent)}
     <ul>
       <li>Set up the NestJS backend for the iOS and Android apps, with JWT login plus Sign in with Apple and Google.</li>
       <li>Integrated Paystack checkout and push notifications through Redis and BullMQ.</li>
+      <li>Built a recommendation system that suggests products based on text the user types, using the OpenAI API.</li>
     </ul>
   </div>
 
