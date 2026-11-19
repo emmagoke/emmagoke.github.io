@@ -48,6 +48,9 @@ section>.wrap>h2{font-size:26px;margin-bottom:24px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:16px}
 .card h3{font-size:18px;margin-bottom:6px}
 .card p{margin:0;color:var(--mute);font-size:15px}
+.card .links{margin-top:14px;font-size:14px}
+.card .links a{color:var(--accent);text-decoration:none;font-weight:500}
+.card .links a:hover{text-decoration:underline}
 form{display:grid;gap:14px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.row,.nums{grid-template-columns:1fr}nav{display:none}}
@@ -107,7 +110,7 @@ footer a:hover{color:var(--accent)}
   </div>
 
   <div class="job">
-    <div class="meta"><span>CrescitaSolutions · Queposts (contract)</span><span>Aug – Dec 2025</span></div>
+    <div class="meta"><span>CrescitaSolutions · Queposts (contract)</span><span>Aug – Feb 2026</span></div>
       <h3>Backend Engineer</h3>
       <ul>
         <li>Designed a classifieds platform for jobs, businesses and services from scratch in NestJS.</li>
@@ -146,9 +149,18 @@ footer a:hover{color:var(--accent)}
 <section id="projects"><div class="wrap">
   <h2>Things I've been building lately</h2>
   <div class="card">
+    <h3>Real-time multiplayer Tic Tac Toe</h3>
+    <p>A two-player game over WebSockets with a server-authoritative NestJS backend. Games, rounds and every move are stored in PostgreSQL, so a player who closes the tab can rejoin and any game can be replayed move by move. It has guest JWT login, BullMQ turn timers that forfeit idle players, Jest tests and Sentry error tracking.</p>
+    <div class="tags"><span>NestJS</span><span>Socket.IO</span><span>PostgreSQL</span><span>BullMQ</span><span>JWT</span></div>
+    <!-- GitHub link: uncomment once the repo is public (adjust the repo name if you chose another) -->
+    <div class="links"><a href="https://github.com/emmagoke/realtime-tic-tac-toe" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+    <!--  -->
+  </div>
+  <div class="card">
     <h3>Flask monitoring app on Amazon EKS</h3>
     <p>A Flask and psutil dashboard with live CPU and memory gauges. I containerised it with Docker, pushed it to ECR and deployed it to EKS with Python scripts.</p>
     <div class="tags"><span>Docker</span><span>ECR</span><span>EKS</span><span>Flask</span></div>
+    <!-- <div class="links"><a href="https://github.com/emmagoke/realtime-tic-tac-toe" target="_blank" rel="noopener">View on GitHub ↗</a></div> -->
   </div>
   <div class="card" style="margin-bottom:0">
     <h3>Three-tier AWS infrastructure with Terraform</h3>
